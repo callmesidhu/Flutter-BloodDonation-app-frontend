@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,6 +15,15 @@ class _HomePageState extends State<HomePage> {
         title: Text("Blood Donation App"),
         backgroundColor: Colors.red,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},  // Corrected here
+        backgroundColor: Colors.red,
+        child: Icon(
+          Icons.add, 
+          size: 40,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
