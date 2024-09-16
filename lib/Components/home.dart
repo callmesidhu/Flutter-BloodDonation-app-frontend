@@ -16,7 +16,9 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.red,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},  // Corrected here
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },  // Corrected here
         backgroundColor: Colors.red,
         child: Icon(
           Icons.add, 

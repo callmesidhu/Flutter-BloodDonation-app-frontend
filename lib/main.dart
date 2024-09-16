@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Components/home.dart';
+import 'Components/add.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Blood Donation',
       routes: {
         '/': (context) => HomePage(),
+        '/add': (context)=> AddUser(),
       },
       initialRoute: '/',
     );  
