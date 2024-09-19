@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,9 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  final CollectionReference donor = FirebaseFirestore.instance.collection('donor');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,21 +26,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: StreamBuilder(
-        stream: donor.snapshots(), 
-        builder: (context,AsyncSnapshot snapshot){
-          if(snapshot.hasData){
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder:(context, index){
-                final DocumentSnapshot donarSnap = snapshot.data.docs[index];
-                return Text(donarSnap['name']);
-              }
-              );
-          } else {
-            return Center(child: Text('No donors found.'));
-          }
-        }),
     );
   }
 }
