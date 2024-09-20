@@ -1,3 +1,33 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2'  // Use a compatible version
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33 // Update this as needed
+    defaultConfig {
+        applicationId "com.example.flutter_blooddonation" // Update with your app's ID
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -5,17 +35,4 @@ allprojects {
     }
 }
 
-rootProject.buildDir = "../build"
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
-}
 
-tasks.register("clean", Delete) {
-    delete rootProject.buildDir
-}
-plugins {
-    id 'com.google.gms.google-services' version '4.4.2' apply false
-}
