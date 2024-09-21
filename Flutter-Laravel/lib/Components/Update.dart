@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 
 class UpdateDonor extends StatefulWidget {
@@ -11,26 +11,12 @@ class UpdateDonor extends StatefulWidget {
 class _UpdateDonorState extends State<UpdateDonor> {
   final bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
   String? selectedGroup;
-  final CollectionReference donor = FirebaseFirestore.instance.collection('donor');
-  TextEditingController donorName = TextEditingController();
-  TextEditingController donorPhone = TextEditingController();
-  void UpdateDonor(docId){
-    final data = {
-      'name': donorName.text,
-      'phone': donorPhone.text,
-      'blood':selectedGroup
-    };
-    donor.doc(docId).update(data);
-  }
+
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final  args  = ModalRoute.of(context)!.settings.arguments as Map;
-    donorName.text = args['name'];
-    donorPhone.text = args['phone'];
-    selectedGroup = args['blood'];
-    final docId = args['id'];
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +32,7 @@ class _UpdateDonorState extends State<UpdateDonor> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: donorName,
+                
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text("Donor Name"),
@@ -62,7 +48,7 @@ class _UpdateDonorState extends State<UpdateDonor> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: donorPhone,
+                 
                   keyboardType: TextInputType.number,
                   maxLength: 10,
                   decoration: InputDecoration(
@@ -104,7 +90,7 @@ class _UpdateDonorState extends State<UpdateDonor> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    UpdateDonor(docId);
+                 
                     Navigator.pop(context);
                   }
                 },
