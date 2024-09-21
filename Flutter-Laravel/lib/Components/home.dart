@@ -32,10 +32,60 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: bloodList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  title: Text(bloodList[index].name),
-                  subtitle: Text('Phone: ${bloodList[index].phone}\nBlood Group: ${bloodList[index].bloodGroup}'),
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 10,
+                          spreadRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.red,
+                            radius: 30,
+                            child: Text(
+                              bloodList[index].blood,
+                              style: TextStyle(fontSize: 25, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  bloodList[index].name,
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Phone: ${bloodList[index].phone}',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             );

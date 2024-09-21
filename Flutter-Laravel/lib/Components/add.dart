@@ -1,4 +1,4 @@
-
+import 'package:bl/config/api_service.dart';
 import 'package:flutter/material.dart';
 
 class AddUser extends StatefulWidget {
@@ -13,7 +13,34 @@ class _AddUserState extends State<AddUser> {
   String? selectedGroup;
   final _formKey = GlobalKey<FormState>();
 
- 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
+  void submitData() {
+    final name = nameController.text;
+    final phone = phoneController.text;
+    final blood = selectedGroup;
+
+    if (blood == null) {
+      // Handle the case where blood group is not selected
+      return;
+    }
+
+    addBloodData(name, phone, blood).then((_) {
+      // Handle success
+      Navigator.pop(context); // Navigate back only on success
+    }).catchError((error) {
+      // Handle error
+      print('Error: $error'); // Log the error
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +52,13 @@ class _AddUserState extends State<AddUser> {
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Form(
-          key: _formKey,  // Assign the form key here
+          key: _formKey,
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: nameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text("Donor Name"),
@@ -46,7 +74,7 @@ class _AddUserState extends State<AddUser> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-          
+                  controller: phoneController,
                   keyboardType: TextInputType.number,
                   maxLength: 10,
                   decoration: InputDecoration(
@@ -87,8 +115,7 @@ class _AddUserState extends State<AddUser> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                 
-                    Navigator.pop(context);
+                    submitData(); // Call submitData
                   }
                 },
                 style: ButtonStyle(
