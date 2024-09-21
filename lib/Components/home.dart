@@ -81,7 +81,15 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Row(
                           children: [
-                            IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                            IconButton(onPressed: (){
+                              Navigator.pushNamed(context, '/update',  
+                              arguments:{
+                                'name' : donorSnap['name'],
+                                'phone': donorSnap['phone'].toString(),
+                                'blood': donorSnap['blood'],
+                                'id': donorSnap.id,   
+                              });
+                            }, icon: Icon(Icons.edit)),
                             IconButton(onPressed: (){}, icon: Icon(Icons.delete )),
                           ],
                         )

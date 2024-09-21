@@ -1,3 +1,4 @@
+import 'package:bl/Components/update.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Components/home.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/add': (context)=> AddUser(),
+        '/update': (context)=> UpdateDonor(),
       },
       initialRoute: '/',
     );  
