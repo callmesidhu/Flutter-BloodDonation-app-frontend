@@ -11,11 +11,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final CollectionReference donor = FirebaseFirestore.instance.collection("donor");
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Blood Donation App"),
+        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
         backgroundColor: Colors.red,
       ),
       floatingActionButton: FloatingActionButton(
