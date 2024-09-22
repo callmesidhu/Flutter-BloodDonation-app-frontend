@@ -1,0 +1,2 @@
+# Frontend : Flutter 
+# Backend : Firebase
