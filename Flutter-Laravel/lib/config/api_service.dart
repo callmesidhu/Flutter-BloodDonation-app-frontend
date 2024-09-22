@@ -13,25 +13,19 @@ Future<List<Blood>> fetchBloodData() async {
     return jsonResponse.map((data) => Blood.fromJson(data)).toList();
   } else {
     // Print the error response for debugging
-    print('Failed to load blood data: ${response.body}');
+    print('Failed to load blood data: ');
     throw Exception('Failed to load blood data');
   }
 }
 
 //Create (CRUD)
-Future<void> addBloodData(String name, String phone, String blood) async {
-  final response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/api/add'), // Replace with your actual URL
-    headers: {'Content-Type': 'application/json'},
-    body: json.encode({'name': name, 'phone': phone, 'blood': blood}),
+Future<void> addBloodData(String name, String phone, String bloodGroup) async {
+  // Construct the URL with query parameters
+  final response = await http.get(
+    Uri.parse('http://127.0.0.1:8000/api/add?name=$name&phone=$phone&blood=$bloodGroup'),
   );
 
-  if (response.statusCode == 200 || response.statusCode == 201) {
-    print('Blood data added successfully!');
-  } else {
-    // Log the error response for debugging
-    print('Failed to add blood data: ${response.statusCode}');
-    print('Response body:');  // This will show why the request failed
-    throw Exception('Failed to add blood data:');
+  if (response.statusCode != 200) {
+    throw Exception('Failed to add donor: ${response.body}');
   }
 }

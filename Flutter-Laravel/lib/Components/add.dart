@@ -16,13 +16,6 @@ class _AddUserState extends State<AddUser> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  @override
-  void dispose() {
-    nameController.dispose();
-    phoneController.dispose();
-    super.dispose();
-  }
-
   void submitData() {
     final name = nameController.text;
     final phone = phoneController.text;
@@ -35,10 +28,11 @@ class _AddUserState extends State<AddUser> {
 
     addBloodData(name, phone, blood).then((_) {
       // Handle success
+      
       Navigator.pop(context); // Navigate back only on success
     }).catchError((error) {
       // Handle error
-      print('Error: $error'); // Log the error
+     
     });
   }
 
@@ -115,7 +109,8 @@ class _AddUserState extends State<AddUser> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    submitData(); // Call submitData
+                    submitData();
+                    Navigator.pop(context);  // Call submitData
                   }
                 },
                 style: ButtonStyle(
